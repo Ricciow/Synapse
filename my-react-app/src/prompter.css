@@ -19,7 +19,7 @@
     font-size: var(--font-text);
     margin: var(--md);
     resize: none;
-    max-height: 20rem;
+    max-height: 15rem;
 
     scrollbar-color: var(--primary-color) transparent;
 }
