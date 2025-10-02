@@ -1,0 +1,43 @@
+@import url('https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css');
+
+.dropdown_select {
+    display: flex;
+    background-color: var(--secondary-color);
+    color: white;
+    width: 10rem;
+    padding: var(--sm);
+    margin: var(--md);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(107, 107, 107, 0.5);
+}
+
+.dropdown_select p {
+    flex: 1;
+    text-align: center;
+}
+
+.dropdown_options {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    width: 10rem;
+    padding: var(--sm);
+    margin: var(--md);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(107, 107, 107, 0.5);
+    gap: var(--md);
+}
+
+.dropdown_options.closed {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease;
+}
+
+.dropdown_options.open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease;
+}
