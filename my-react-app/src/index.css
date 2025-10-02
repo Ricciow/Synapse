@@ -50,4 +50,13 @@ body {
     grid-area: main;
     display: flex;
     flex-direction: row;
+    padding: var(--md);
+}
+
+.chat_divider {
+    width: 4px;
+    border-radius: 2px;
+    background-color: var(--border-color-secondary);
+    opacity: 0.1;
+    margin: 0 var(--md);
 }

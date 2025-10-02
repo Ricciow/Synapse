@@ -1,6 +1,13 @@
 @import url('https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css');
 
+.dropdown_select_container {
+    position: relative;
+    grid-area: dropdown;
+    z-index: 1000;
+}
+
 .dropdown_select {
+    position: absolute;
     display: flex;
     background-color: var(--secondary-color);
     color: white;
@@ -29,6 +36,7 @@
     gap: var(--md);
     transition: opacity 0.25s ease, visibility 0.25s ease;
     position: absolute;
+    top: 3rem;
 }
 
 .dropdown_options.closed {

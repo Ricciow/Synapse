@@ -12,7 +12,7 @@ export default function DropdownSelect({ onSelect, selected }: { onSelect?: (mod
     }
 
     return (
-        <div>
+        <div className="dropdown_select_container">
             <button 
                 className="dropdown_select card border"
                 onClick={handleClick}

@@ -10,6 +10,8 @@ import openaiLogo from "./assets/openai.svg"
 import geminiLogo from "./assets/gemini.svg"
 import Chat from "./chat";
 
+const chatLimit = 2;
+
 export default function Index() {
     const [selectedModels, setSelectedModels] = useState<SelectedModelsProps>({
         "Claude 4 Opus": {
@@ -33,7 +35,7 @@ export default function Index() {
     }
 
     function handleModelSelect(model: string) {
-        if(totalSelected >= 2 && !selectedModels[model].selected) return;
+        if(totalSelected >= chatLimit && !selectedModels[model].selected) return;
 
         if(selectedModels[model].selected === true) {
             totalSelected--;
@@ -56,9 +58,13 @@ export default function Index() {
             <Sidebar />
             <DropdownSelect onSelect={handleModelSelect} selected={selectedModels}/>
             <div className="chat_area">
-                {Object.keys(selectedModels).filter(model => selectedModels[model].selected).map((model) => (
+                {
+                Object.keys(selectedModels).filter(model => selectedModels[model].selected).map((model) => (
                     <Chat key={model} modelName={model} modelData={selectedModels[model]} />
-                ))}
+                )).flatMap((chat, index, array) => (
+                    index < array.length - 1 ? [chat, <div className="chat_divider"/>] : [chat]
+                ))
+                }
             </div>
             <Prompter />
         </div>
