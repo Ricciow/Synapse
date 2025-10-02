@@ -14,18 +14,32 @@
 }
 
 .sidebar * {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
-.logo {
-    display: none;
-    font-size: var(--font-title);
+.logo_area {
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
 }
 
-.logo_small {
-    display: flex;
+.logo {
     font-size: var(--font-title);
+    opacity: 0;
+    height: 0px;
+}
+
+.logo_small {
+    visibility: visible;
+    opacity: 1;
+    font-size: var(--font-title);
+    transition: opacity 0s none;
 }
 
 .sidebar:hover {
@@ -33,20 +47,33 @@
 }
 
 .sidebar:hover * {
-    display: flex;
+    visibility: visible;
+    opacity: 1;
     width: 100%;
 }
 
 .sidebar:hover .logo_small {
-    display: none;
+    height: 0px;
+    width: 0px;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .sidebar:hover .logo {
     display: flex;
     justify-content: center;
+    opacity: 1;
+    width: 100%;
+    height: auto;
+}
+
+.sidebar:hover .logo::first-letter {
+    opacity: 1;
+    visibility: visible;
 }
 
 .conversations {
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
