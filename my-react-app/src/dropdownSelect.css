@@ -27,10 +27,8 @@
     border: none;
     box-shadow: 0px 0px 10px rgba(107, 107, 107, 0.5);
     gap: var(--md);
-}
-
-.dropdown_options {
     transition: opacity 0.25s ease, visibility 0.25s ease;
+    position: absolute;
 }
 
 .dropdown_options.closed {
