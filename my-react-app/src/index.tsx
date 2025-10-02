@@ -8,6 +8,7 @@ import type { SelectedModelsProps } from "./props";
 import claudeLogo from "./assets/claude.svg"
 import openaiLogo from "./assets/openai.svg"
 import geminiLogo from "./assets/gemini.svg"
+import Chat from "./chat";
 
 export default function Index() {
     const [selectedModels, setSelectedModels] = useState<SelectedModelsProps>({
@@ -52,8 +53,13 @@ export default function Index() {
 
     return (
         <div className="app">
-            <DropdownSelect onSelect={handleModelSelect} selected={selectedModels}/>
             <Sidebar />
+            <DropdownSelect onSelect={handleModelSelect} selected={selectedModels}/>
+            <div className="chat_area">
+                {Object.keys(selectedModels).filter(model => selectedModels[model].selected).map((model) => (
+                    <Chat key={model} modelName={model} modelData={selectedModels[model]} />
+                ))}
+            </div>
             <Prompter />
         </div>
     )

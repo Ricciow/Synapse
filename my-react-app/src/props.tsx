@@ -1,3 +1,8 @@
 export type SelectedModelsProps = {
-    [model: string]: { selected: boolean, logo: string }
+    [model: string]: ModelProps
+}
+
+export type ModelProps = {
+    selected: boolean,
+    logo: string
 }

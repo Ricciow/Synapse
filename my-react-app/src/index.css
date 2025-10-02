@@ -38,9 +38,16 @@ body {
 .app {
     display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto 1fr auto;
     grid-template-areas: 
         "sidebar dropdown"
         "sidebar main"
         "sidebar prompt";
+    height: 100vh;
+}
+
+.chat_area {
+    grid-area: main;
+    display: flex;
+    flex-direction: row;
 }
