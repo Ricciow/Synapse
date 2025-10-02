@@ -4,9 +4,9 @@ import logo from "./assets/synapse_logo.png"
 
 export default function Sidebar() {
     const conversations = [
-        { id: 1, title: "Conversação 1" },
-        { id: 2, title: "Conversação 2" },
-        { id: 3, title: "Conversação 3" },
+        { id: 1, title: "Conversa 1" },
+        { id: 2, title: "Conversa 2" },
+        { id: 3, title: "Conversa 3" },
     ]
 
     return (
