@@ -10,7 +10,7 @@ import openaiLogo from "./assets/openai.svg"
 import geminiLogo from "./assets/gemini.svg"
 import Chat from "./chat";
 
-const chatLimit = 2;
+const chatLimit = 3;
 
 export default function Index() {
     const [selectedModels, setSelectedModels] = useState<SelectedModelsProps>({
