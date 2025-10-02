@@ -11,6 +11,7 @@ export default function Sidebar() {
     return (
         <div className="sidebar">
             <h1 className="logo">Synapse</h1>
+            <h1 className="logo_small">S</h1>
             <button className="new card border hoverable">Nova Conversa</button>
             <nav className="conversations">
                 {conversations.map((conv) => (

@@ -3,6 +3,8 @@ import "./index.css";
 
 export default function Index() {
     return (
-        <Sidebar />
+        <div className="app">
+            <Sidebar />
+        </div>
     )
 }
