@@ -33,6 +33,9 @@
     font-size: var(--font-title);
     opacity: 0;
     height: 0px;
+    background-clip: text;
+    background-image: linear-gradient(0deg, #F31D86 25%, #5D95C2 50%, #1DE3DF 90%);
+    color: transparent;
 }
 
 .logo_small {
@@ -40,6 +43,8 @@
     opacity: 1;
     font-size: var(--font-title);
     transition: opacity 0s none;
+    width: 2rem;
+    height: auto;
 }
 
 .sidebar:hover {
