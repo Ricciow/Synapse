@@ -17,6 +17,7 @@
     --font-small: 0.75rem;
 
     --border-color: #ddd;
+    --border-color-secondary: #6e6e6e;
     --border-radius: 0.5rem;
     --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -36,5 +37,8 @@ body {
 .app {
     display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-areas: "sidebar main";
+    grid-template-rows: auto auto;
+    grid-template-areas: 
+        "sidebar main"
+        "sidebar prompt";
 }
