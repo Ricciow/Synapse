@@ -1,7 +1,7 @@
 .dropdown_option {
     color: var(--text-primary);
     padding: var(--xs);
-    border: none;
+    border: transparent 2px solid;
     display: flex;
     align-items: center;
 }
@@ -16,4 +16,12 @@
 .dropdown_option p {
     flex: 1;
     text-align: left;
+}
+
+.selected {
+    border: var(--border-color-secondary) 2px solid;
+}
+
+.selected:hover {
+    background-color: var(--primary-color);
 }

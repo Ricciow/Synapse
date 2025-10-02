@@ -25,7 +25,6 @@
     padding: var(--sm);
     margin: var(--md);
     border: none;
-    cursor: pointer;
     box-shadow: 0px 0px 10px rgba(107, 107, 107, 0.5);
     gap: var(--md);
 }

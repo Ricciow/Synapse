@@ -12,7 +12,7 @@ import geminiLogo from "./assets/gemini.svg"
 export default function Index() {
     const [selectedModels, setSelectedModels] = useState<SelectedModelsProps>({
         "Claude 4 Opus": {
-            selected: false,
+            selected: true,
             logo: claudeLogo
         },
         "GPT-5": {
@@ -24,8 +24,23 @@ export default function Index() {
             logo: geminiLogo
         }
     })
+    var totalSelected = 0;
+    for (const model in selectedModels) {
+        if (selectedModels[model].selected) {
+            totalSelected++;
+        }
+    }
 
     function handleModelSelect(model: string) {
+        if(totalSelected >= 2 && !selectedModels[model].selected) return;
+
+        if(selectedModels[model].selected === true) {
+            totalSelected--;
+        }
+        else {
+            totalSelected++;
+        }
+
         setSelectedModels({
             ...selectedModels,
             [model]: {
