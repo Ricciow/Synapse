@@ -5,10 +5,11 @@
     display: flex;
     align-items: center;
     margin: var(--md);
-
+    opacity: 1;
     border: 1px solid var(--border-color-secondary);
     border-radius: var(--border-radius);
     overflow: hidden;
+    transition: opacity 0.4s ease;
 }
 
 .prompt_input {
@@ -42,4 +43,9 @@
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
 }

@@ -2,7 +2,7 @@ import "./prompter.css"
 import "./card.css"
 import { useEffect, useRef, useState } from "react"
 
-export default function Prompter() {
+export default function Prompter({ enabled = true }: { enabled: boolean }) {
     const [text, setText] = useState("")
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -19,14 +19,14 @@ export default function Prompter() {
     }
 
     return (
-        <label className="prompter card" htmlFor="prompt_input" aria-label="Input de mensagem">
+        <label className={`prompter card ${!enabled ? "disabled" : ""}`} htmlFor="prompt_input" aria-label="Input de mensagem">
             <textarea 
                 className="prompt_input" 
                 id="prompt_input" 
                 value={text} 
                 onChange={handleChange} 
                 ref={textAreaRef} 
-                placeholder="Digite sua mensagem aqui..." 
+                placeholder={enabled ? "Digite sua mensagem aqui..." : "Selecione ao menos um modelo para começar a conversar."} 
             />
             <button className="send_button"><i className="fi fi-rr-paper-plane-top"/></button>
         </label>

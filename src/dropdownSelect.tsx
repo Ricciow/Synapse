@@ -21,9 +21,9 @@ export default function DropdownSelect({ onSelect, selected }: { onSelect?: (mod
                 <i className={`fi fi-br-angle-${dropdownOpen ? "up" : "down"}`}></i>
             </button>
             <div className={`dropdown_options card border ${dropdownOpen ? "open" : "closed"}`}>
-                <DropdownOption onSelect={onSelect} selected={selected} title="Claude 4 Opus" />
-                <DropdownOption onSelect={onSelect} selected={selected} title="GPT-5" />
-                <DropdownOption onSelect={onSelect} selected={selected} title="Gemini 2.5 Pro" />
+                {Object.keys(selected || {}).map((model) => (
+                    <DropdownOption key={model} onSelect={onSelect} selected={selected} title={model} />
+                ))}
             </div>
         </div>
     )

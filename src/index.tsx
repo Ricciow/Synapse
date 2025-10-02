@@ -14,7 +14,7 @@ const chatLimit = 3;
 
 export default function Index() {
     const [selectedModels, setSelectedModels] = useState<SelectedModelsProps>({
-        "Claude 4 Opus": {
+        "Claude Sonnet 4.5": {
             selected: true,
             logo: claudeLogo
         },
@@ -66,7 +66,7 @@ export default function Index() {
                 ))
                 }
             </div>
-            <Prompter />
+            <Prompter enabled={totalSelected > 0}/>
         </div>
     )
 }

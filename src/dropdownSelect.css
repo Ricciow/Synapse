@@ -34,7 +34,6 @@
     display: flex;
     flex-direction: column;
     color: white;
-    width: 10rem;
     padding: var(--sm);
     margin: var(--md);
     border: none;
