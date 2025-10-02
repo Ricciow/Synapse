@@ -20,6 +20,7 @@
 
 .selected {
     border: var(--border-color-secondary) 2px solid;
+    box-shadow: 0px 0px 5px rgba(107, 107, 107, 0.5);
 }
 
 .selected:hover {
