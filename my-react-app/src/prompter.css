@@ -34,7 +34,7 @@
     color: var(--text-primary);
     cursor: pointer;
     align-self: flex-end;
-    margin: 0 var(--md) var(--md) 0;
+    margin: 0 var(--md) 1.35rem 0;
 }
 
 .send_button i {
