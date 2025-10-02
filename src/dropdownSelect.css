@@ -17,6 +17,12 @@
     border: none;
     cursor: pointer;
     box-shadow: 0px 0px 10px rgba(107, 107, 107, 0.5);
+    border: 1px solid transparent;
+}
+
+.dropdown_select:hover {
+    background-color: var(--hover-color);
+    border: 1px solid var(--border-color-secondary);
 }
 
 .dropdown_select p {
