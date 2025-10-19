@@ -1,0 +1,51 @@
+@import url('https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
+
+.prompter {
+  grid-area: prompt;
+  display: flex;
+  align-items: center;
+  margin: var(--md);
+  opacity: 1;
+  border: 1px solid var(--border-color-secondary);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: opacity 0.4s ease;
+}
+
+.prompt_input {
+  flex: 1;
+  background-color: var(--secondary-color);
+  border: none;
+  color: var(--text-primary);
+  font-size: var(--font-text);
+  margin: var(--md);
+  resize: none;
+  max-height: 15rem;
+
+  scrollbar-color: var(--primary-color) transparent;
+}
+
+.prompt_input:focus {
+  outline: none;
+}
+
+.send_button {
+  background-color: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  align-self: flex-end;
+  margin: 0 var(--md) 1.35rem 0;
+}
+
+.send_button i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
