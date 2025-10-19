@@ -1,0 +1,109 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--secondary-color);
+  width: 4rem;
+  gap: var(--md);
+  padding: var(--md) var(--md);
+  box-shadow: 0px 0px 10px rgba(107, 107, 107, 0.5);
+  grid-area: sidebar;
+
+  transition: width 0.5s ease;
+}
+
+.sidebar * {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.2s;
+}
+
+.logo_area {
+  opacity: 1;
+  visibility: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.logo {
+  font-size: var(--font-title);
+  opacity: 0;
+  height: 0px;
+  background-clip: text;
+  background-image: linear-gradient(
+    0deg,
+    #f31d86 25%,
+    #5d95c2 50%,
+    #1de3df 90%
+  );
+  color: transparent;
+}
+
+.logo_small {
+  visibility: visible;
+  opacity: 1;
+  font-size: var(--font-title);
+  transition: opacity 0s none;
+  width: 2rem;
+  height: auto;
+}
+
+.sidebar:hover {
+  width: 15rem;
+}
+
+.sidebar:hover * {
+  visibility: visible;
+  opacity: 1;
+  width: 100%;
+}
+
+.sidebar:hover .logo_small {
+  height: 0px;
+  width: 0px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.sidebar:hover .logo {
+  display: flex;
+  justify-content: center;
+  opacity: 1;
+  width: 100%;
+  height: auto;
+}
+
+.sidebar:hover .logo::first-letter {
+  opacity: 1;
+  visibility: visible;
+}
+
+.conversations {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: var(--sm);
+}
+
+.conversation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: var(--font-text);
+  padding: var(--sm);
+  text-wrap: nowrap;
+}
+
+.new {
+  color: var(--text-secondary);
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-text);
+  padding: var(--sm);
+  text-wrap: nowrap;
+}
