@@ -1,0 +1,36 @@
+.chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--xl);
+}
+
+.chat_header {
+  color: var(--text-primary);
+  padding: var(--xs);
+  border: transparent 2px solid;
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+}
+
+.model-checkbox {
+  width: 16px;
+  height: 16px;
+  margin-right: var(--md);
+  cursor: pointer;
+}
+
+.chat_header img {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: var(--md);
+  filter: invert(100%) sepia(0%) saturate(7480%) hue-rotate(176deg)
+    brightness(103%) contrast(103%);
+}
+
+.chat_header p {
+  flex: 1;
+  text-align: left;
+}
