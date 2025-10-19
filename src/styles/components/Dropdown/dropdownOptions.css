@@ -1,0 +1,29 @@
+.dropdown_option {
+  color: var(--text-primary);
+  padding: var(--xs);
+  border: transparent 2px solid;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown_option img {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: var(--md);
+  filter: invert(100%) sepia(0%) saturate(7480%) hue-rotate(176deg)
+    brightness(103%) contrast(103%);
+}
+
+.dropdown_option p {
+  flex: 1;
+  text-align: left;
+}
+
+.selected {
+  border: var(--border-color-secondary) 1.5px solid;
+  box-shadow: 0px 0px 5px rgba(107, 107, 107, 0.5);
+}
+
+.selected:hover {
+  background-color: var(--primary-color);
+}
