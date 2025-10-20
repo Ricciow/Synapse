@@ -4,9 +4,12 @@ import '/src/styles/pages/Synapse.css';
 import '/src/styles/components/projetos/SynapseHeader.css';
 import '/src/styles/components/projetos/SynapseFooter.css';
 import '/src/styles/components/Button.css';
-import dev1 from '/src/components/assets/dev1.jpg';
-import dev2 from '/src/components/assets/dev2.jpg';
-import dev3 from '/src/components/assets/dev3.jpg';
+import dev1 from '/src/components/assets/dev1.png';
+import dev2 from '/src/components/assets/dev2.png';
+import dev3 from '/src/components/assets/dev3.jpng';
+import dev4 from '/src/components/assets/dev4.jpng';
+import dev5 from '/src/components/assets/dev5.jpng';
+
 
 const Synapse: FC = () => {
   const navigate = useNavigate();
@@ -212,14 +215,14 @@ const Synapse: FC = () => {
         React.createElement(
           'div',
           { className: 'dev-card' },
-          React.createElement('img', { src: dev3, alt: 'Dev4' }),
+          React.createElement('img', { src: dev4, alt: 'Dev4' }),
           React.createElement('h4', null, 'Dev4'),
           React.createElement('p', null, 'Lior')
         ),
         React.createElement(
           'div',
           { className: 'dev-card' },
-          React.createElement('img', { src: dev3, alt: 'Dev5' }),
+          React.createElement('img', { src: dev5, alt: 'Dev5' }),
           React.createElement('h4', null, 'Dev5'),
           React.createElement('p', null, 'Vinícius')
         )
