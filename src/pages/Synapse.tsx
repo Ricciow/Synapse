@@ -6,9 +6,9 @@ import '/src/styles/components/projetos/SynapseFooter.css';
 import '/src/styles/components/Button.css';
 import dev1 from '/src/components/assets/dev1.png';
 import dev2 from '/src/components/assets/dev2.png';
-import dev3 from '/src/components/assets/dev3.jpng';
-import dev4 from '/src/components/assets/dev4.jpng';
-import dev5 from '/src/components/assets/dev5.jpng';
+import dev3 from '/src/components/assets/dev3.png';
+import dev4 from '/src/components/assets/dev4.png';
+import dev5 from '/src/components/assets/dev5.png';
 
 
 const Synapse: FC = () => {
