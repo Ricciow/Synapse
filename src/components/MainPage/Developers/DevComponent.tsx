@@ -4,13 +4,16 @@ import '../styles/components/projetos/SynapseHeader.css';
 import '../styles/components/projetos/SynapseFooter.css';
 
 function DevCard ({image, title, name} : {image: string; title: string; name: string}) {
-    <div className="devs-grid">
-        <div className='dev-card'>
-                <img src={image} alt={title}/>
-                <h4>{title}</h4>
-                <p>{name}i</p>
+    return (
+        <div className="devs-grid">
+            <div className='dev-card'>
+                    <img src={image} alt={title}/>
+                    <h4>{title}</h4>
+                    <p>{name}i</p>
+            </div>
         </div>
-    </div>
+    )
+
 }
 
 export default DevCard;

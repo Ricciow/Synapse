@@ -51,5 +51,3 @@ export default function Synapse () {
       </div>  
   )
 }
-
-export default Synapse;

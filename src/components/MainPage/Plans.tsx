@@ -1,5 +1,4 @@
 import React from   'react';
-import { Link } from 'react-router-dom';
 import '../styles/pages/Synapse.css';
 import '../styles/components/projetos/SynapseHeader.css';
 import '../styles/components/projetos/SynapseFooter.css';
