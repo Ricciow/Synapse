@@ -1,5 +1,5 @@
-import Sidebar from '/src/components/Sidebar.tsx';
-import Prompter from '/src/components/Prompter.tsx';
+import Sidebar from '/src/components/projetos/Sidebar.tsx';
+import Prompter from '/src/components/projetos/Prompter.tsx';
 import '/src/styles/pages/ChatPage.css';
 import DropdownSelect from '/src/components/Dropdown/dropdownSelect.tsx';
 import { useState } from 'react';

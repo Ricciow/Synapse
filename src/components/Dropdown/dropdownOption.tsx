@@ -1,5 +1,5 @@
 import '../../styles/components/Dropdown/dropdownOptions.css';
-import type { SelectedModelsProps } from '../Props.tsx';
+import type { SelectedModelsProps } from '../projetos/Props.tsx';
 
 export default function DropdownOption({
   title,

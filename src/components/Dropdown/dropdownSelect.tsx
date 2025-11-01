@@ -3,7 +3,7 @@ import '../../styles/components/Dropdown/dropdownSelect.css';
 import '../../styles/components/Cards/card.css';
 import { useState } from 'react';
 import DropdownOption from './dropdownOption';
-import type { SelectedModelsProps } from '../../components/Props.tsx';
+import type { SelectedModelsProps } from '../projetos/Props.tsx';
 
 export default function DropdownSelect({
   onSelect,

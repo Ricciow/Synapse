@@ -1,4 +1,4 @@
-import type { ModelProps } from '../Props.tsx';
+import type { ModelProps } from '../projetos/Props.tsx';
 import '../../styles/components/ChatAnswerArea.css';
 
 export default function Chat({
