@@ -3,7 +3,7 @@ import { Suspense, useState } from "react";
 import ErrorPage from "./ErrorPage";
 import Spinner from "../components/Others/Spinner.tsx";
 import Sidebar from "../components/projetos/Sidebar";
-import Prompter from "../components/projetos/Prompter";
+import Prompter from "../components/Chat/Prompter.tsx";
 import DropdownSelect from "../components/Dropdown/dropdownSelect";
 import Chat from "../components/ChatPage/ChatAnswerArea";
 import { authTokenLocalStorage } from "../constants/localstorage";

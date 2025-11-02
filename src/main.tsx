@@ -9,6 +9,9 @@ import {
 import ErrorPage from './pages/ErrorPage';
 import Synapse from './pages/Synapse';
 import ChatPage from './pages/ChatPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import Authprovider from './components/Auth/authProvider';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +19,14 @@ const router = createBrowserRouter([
     loader: () => {
       return redirect('/synapse');
     },
+  },
+  {
+      path: "/login",
+      element: <LoginPage />,
+  },
+  {
+      path: "/register",
+      element: <RegisterPage />,
   },
   {
     path: '/chat',
@@ -33,6 +44,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Authprovider>
+      <RouterProvider router={router} />
+    </Authprovider>
   </StrictMode>
 );
