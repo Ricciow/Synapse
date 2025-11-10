@@ -2,21 +2,33 @@ import '../styles/components/Prompter.css';
 import '../styles/components/Cards/card.css';
 import { useEffect, useRef, useState } from 'react';
 
-export default function Prompter({ enabled = true }: Readonly<{ enabled: boolean }>) {
+export default function Prompter({ enabled = true, onSubmit = () => {}}: Readonly<{ enabled: boolean, onSubmit: (text: string) => void }>) {
   const [text, setText] = useState('');
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    const textarea = textAreaRef.current;
-    if (textarea) {
-      textarea.style.height = 'auto';
-      textarea.style.height = `${textarea.scrollHeight}px`;
-    }
-  }, [text]);
+        const textarea = textAreaRef.current;
+        if (textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = `${textarea.scrollHeight}px`;
+        }
+    }, [text]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value);
-  };
+    function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
+        setText(event.target.value);
+    };
+
+    function handleKeyDown(event: React.KeyboardEvent<HTMLTextAreaElement>) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            handleSubmit();
+        }
+    };
+
+    function handleSubmit() {
+        onSubmit(text);
+        setText("");
+    };
 
   return (
     <label
@@ -29,6 +41,7 @@ export default function Prompter({ enabled = true }: Readonly<{ enabled: boolean
         id="prompt_input"
         value={text}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         ref={textAreaRef}
         placeholder={
           enabled
@@ -36,7 +49,7 @@ export default function Prompter({ enabled = true }: Readonly<{ enabled: boolean
             : 'Selecione ao menos um modelo para começar a conversar.'
         }
       />
-      <button className="send_button">
+      <button className="send_button" onClick={handleSubmit}>
         <i className="fi fi-rr-paper-plane-top" />
       </button>
     </label>
