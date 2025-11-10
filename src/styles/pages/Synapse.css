@@ -171,25 +171,14 @@
 
 .newsletter-form input {
   padding: var(--smd) var(--md);
-  border-radius: var(--smd);
-  border: none;
+  background-color: var(--primary-color);
   width: 250px;
-}
-
-.newsletter-form button {
-  padding: var(--smd) var(--lg);
-  border-radius: var(--smd);
-  border: none;
-  background: linear-gradient(
-    90deg,
-    var(--purple-button-color),
-    var(--purple-button-hover)
-  );
   color: var(--text-white);
-  cursor: pointer;
-  transition: 0.3s ease;
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--smd);
+  border-bottom: solid 4px var(--secondary-color);
 }
 
-.newsletter-form button:hover {
-  transform: scale(1.05);
+.newsletter-form input::placeholder {
+  color: var(--text-light-gray);
 }
