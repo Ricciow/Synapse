@@ -1,14 +1,14 @@
 import React, { type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '/src/styles/pages/Synapse.css';
-import '/src/styles/components/projetos/SynapseHeader.css';
-import '/src/styles/components/projetos/SynapseFooter.css';
-import '/src/styles/components/Button.css';
-import dev1 from '/src/components/assets/dev1.png';
-import dev2 from '/src/components/assets/dev2.png';
-import dev3 from '/src/components/assets/dev3.png';
-import dev4 from '/src/components/assets/dev4.png';
-import dev5 from '/src/components/assets/dev5.png';
+import '../styles/pages/Synapse.css';
+import '../styles/components/projetos/SynapseHeader.css';
+import '../styles/components/projetos/SynapseFooter.css';
+import '../styles/components/Button.css';
+import dev1 from '../assets/dev1.png';
+import dev2 from '../assets/dev2.png';
+import dev3 from '../assets/dev3.png';
+import dev4 from '../assets/dev4.png';
+import dev5 from '../assets/dev5.png';
 
 
 const Synapse: FC = () => {

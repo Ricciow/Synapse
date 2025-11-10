@@ -1,13 +1,13 @@
-import Sidebar from '/src/components/Sidebar.tsx';
-import Prompter from '/src/components/Prompter.tsx';
-import '/src/styles/pages/ChatPage.css';
-import DropdownSelect from '/src/components/Dropdown/dropdownSelect.tsx';
+import Sidebar from '../components/Sidebar.tsx';
+import Prompter from '../components/Prompter.tsx';
+import '../styles/pages/ChatPage.css';
+import DropdownSelect from '../components/Dropdown/dropdownSelect.tsx';
 import { useState } from 'react';
-import type { SelectedModelsProps } from '/src/components/Props.tsx';
-import claudeLogo from '/src/components/assets/claude.svg';
-import openaiLogo from '/src/components/assets/openai.svg';
-import geminiLogo from '/src/components/assets/gemini.svg';
-import Chat from '/src/components/ChatPage/ChatAnswerArea.tsx';
+import type { SelectedModelsProps } from '../components/Props.tsx';
+import claudeLogo from '../assets/claude.svg';
+import openaiLogo from '../assets/openai.svg';
+import geminiLogo from '../assets/gemini.svg';
+import Chat from '../components/ChatPage/ChatAnswerArea.tsx';
 
 const chatLimit = 3;
 
@@ -26,7 +26,8 @@ export default function ChatPage() {
       logo: geminiLogo,
     },
   });
-  var totalSelected = 0;
+  
+  let totalSelected = 0;
   for (const model in selectedModels) {
     if (selectedModels[model].selected) {
       totalSelected++;

@@ -5,21 +5,21 @@ export default function DropdownOption({
   title,
   onSelect,
   selected,
-}: {
+}: Readonly<{
   title: string;
   onSelect?: (model: string) => void;
   selected?: SelectedModelsProps;
-}) {
-  const exists = selected && selected[title];
+}>) {
+  const exists = selected?.[title];
 
-  var isSelected = exists && selected[title].selected ? true : false;
+  let isSelected = !!(exists && selected[title].selected);
 
   return (
     <button
       className={`dropdown_option card ${
         isSelected ? 'selected' : 'hoverable'
       }`}
-      onClick={() => onSelect && onSelect(title)}
+      onClick={() => onSelect?.(title)}
     >
       <img src={exists ? selected[title].logo : ''} alt={title + ' logo'} />
       <p>{title}</p>

@@ -8,10 +8,10 @@ import type { SelectedModelsProps } from '../../components/Props.tsx';
 export default function DropdownSelect({
   onSelect,
   selected,
-}: {
+}: Readonly<{
   onSelect?: (model: string) => void;
   selected?: SelectedModelsProps;
-}) {
+}>) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   function handleClick() {
@@ -38,7 +38,7 @@ export default function DropdownSelect({
         {Object.keys(selected || {}).map((model) => (
           <DropdownOption
             key={model}
-            onSelect={onSelect}
+            onSelect={handleOptionSelect}
             selected={selected}
             title={model}
           />

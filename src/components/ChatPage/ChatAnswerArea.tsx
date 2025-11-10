@@ -4,10 +4,10 @@ import '../../styles/components/ChatAnswerArea.css';
 export default function Chat({
   modelName,
   modelData,
-}: {
+}: Readonly<{
   modelName: string;
   modelData: ModelProps;
-}) {
+}>) {
   const logo = modelData.logo;
 
   return (
