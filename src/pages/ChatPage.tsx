@@ -68,7 +68,7 @@ export default function ChatPage() {
           ))
           .flatMap((chat, index, array) =>
             index < array.length - 1
-              ? [chat, <div key={`divider${index}`} className="chat_divider" />]
+              ? [chat, <div key={`divider${index}`} className="chat_divider" />] //NOSONAR
               : [chat]
           )}
       </div>
