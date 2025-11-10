@@ -2,7 +2,7 @@ import '../styles/components/Prompter.css';
 import '../styles/components/Cards/card.css';
 import { useEffect, useRef, useState } from 'react';
 
-export default function Prompter({ enabled = true, onSubmit = () => {}}: Readonly<{ enabled: boolean, onSubmit: (text: string) => void }>) {
+export default function Prompter({ enabled = true, onSubmit = () => {}}: Readonly<{ enabled: boolean, onSubmit?: (text: string) => void }>) {
   const [text, setText] = useState('');
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
