@@ -26,7 +26,7 @@ export default function ChatPage() {
       logo: geminiLogo,
     },
   });
-  
+
   let totalSelected = 0;
   for (const model in selectedModels) {
     if (selectedModels[model].selected) {
@@ -68,7 +68,7 @@ export default function ChatPage() {
           ))
           .flatMap((chat, index, array) =>
             index < array.length - 1
-              ? [chat, <div className="chat_divider" />]
+              ? [chat, <div key={`divider${index}`} className="chat_divider" />]
               : [chat]
           )}
       </div>

@@ -20,7 +20,7 @@ export default function Prompter({ enabled = true }: Readonly<{ enabled: boolean
 
   return (
     <label
-      className={`prompter card ${!enabled ? 'disabled' : ''}`}
+      className={`prompter card ${enabled ? '' : 'disabled'}`}
       htmlFor="prompt_input"
       aria-label="Input de mensagem"
     >
