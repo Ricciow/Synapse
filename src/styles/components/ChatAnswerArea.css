@@ -44,4 +44,9 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  gap: var(--lg);
+  overflow-y: scroll;
+  scrollbar-color: var(--midway-color) transparent;
+  -ms-overflow-style: none;
+  height: 100%;
 }

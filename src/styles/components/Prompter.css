@@ -21,7 +21,6 @@
   margin: var(--md);
   resize: none;
   max-height: 15rem;
-
   scrollbar-color: var(--primary-color) transparent;
 }
 

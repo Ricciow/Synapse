@@ -47,11 +47,19 @@ body {
   height: 100vh;
 }
 
+.chat_region {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+  height: 100vh;
+}
+
 .chat_area {
   grid-area: main;
   display: flex;
   flex-direction: row;
   padding: var(--md);
+  overflow-y: hidden;
 }
 
 .chat_divider {

@@ -141,13 +141,16 @@ export default function ChatPage() {
         const userMessage = { role: "user", content: prompt }
         const agentMessage = { role: "assistant", content: "", reasoning: "" }
 
-        setConversation((prev : ConversationProps[]) : ConversationProps[] => {
+        setConversation((prev: ConversationProps[]): ConversationProps[] => {
             return prev.map((conversation) => {
                 if (conversation.model === model) {
-                    conversation.messages.push(userMessage, agentMessage);
+                    return {
+                        ...conversation,
+                        messages: [...conversation.messages, userMessage, agentMessage],
+                    };
                 }
-                return conversation
-            })
+                return conversation;
+            });
         });
         
         const response = await fetch(`${BackendUrl}/conversation/${id}/message`, {
@@ -163,11 +166,15 @@ export default function ChatPage() {
             setConversation((prev : ConversationProps[]) : ConversationProps[] => {
                 return prev.map((conversation) => {
                     if (conversation.model === model) {
-                        conversation.messages.pop();
+                        return {
+                            ...conversation,
+                            messages: conversation.messages.slice(0, -1)
+                        }
                     }
                     return conversation
                 })
             });
+
             throw new Error(`Erro na requisição: ${response.status}`);
         }
         
@@ -201,8 +208,10 @@ export default function ChatPage() {
                         setConversation((prev : ConversationProps[]) : ConversationProps[] => {
                             return prev.map((conversation) => {
                                 if (conversation.model === model) {
-                                    conversation.messages.pop();
-                                    conversation.messages.push(baseResponse);
+                                    return {
+                                        ...conversation,
+                                        messages: [...conversation.messages.slice(0, -1), baseResponse]
+                                    }
                                 }
                                 return conversation
                             })
@@ -228,7 +237,7 @@ export default function ChatPage() {
     }
 
     return (
-        <>
+        <div className="chat_region">
             <DropdownSelect
                 onSelect={handleModelSelect}
                 selected={selectedModels}
@@ -258,6 +267,6 @@ export default function ChatPage() {
                     )}
             </div>
             <Prompter enabled={totalSelected > 0} onSubmit={handleSendPrompt}/>
-        </>
+        </div>
     );
 }
