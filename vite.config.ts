@@ -3,5 +3,11 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()]
+  plugins: [react()],
+
+  preview: {
+    host: '0.0.0.0',
+    port: 8080,
+    allowedHosts: ["synapse.azurewebsites.net"],
+  },
 })
