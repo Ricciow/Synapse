@@ -19,7 +19,7 @@ export default function ChatLayout() {
 
     return (
     <div className="app">
-        <Sidebar conversations={conversations} />
+        <Sidebar conversationsReceived={conversations} />
         <Outlet />
     </div>);
 }

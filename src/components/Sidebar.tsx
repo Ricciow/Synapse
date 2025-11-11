@@ -1,10 +1,12 @@
 import "../styles/components/Sidebar.css";
 import "../styles/components/Cards/card.css";
 import logo from "../assets/synapse_logo.png";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { BackendUrl } from "../constants/env";
+import { useState } from "react";
 
 type SidebarProps = {
-    conversations: conversation[]
+    conversationsReceived: conversation[]
 }
 
 type conversation = {
@@ -12,7 +14,33 @@ type conversation = {
     title: string;
 }
 
-export default function Sidebar({ conversations }: Readonly<SidebarProps>) {
+export default function Sidebar({ conversationsReceived }: Readonly<SidebarProps>) {
+    const [conversations, setConversations] = useState(conversationsReceived);
+
+    const navigate = useNavigate();
+
+    async function handleCreation() {
+        const response = await fetch(`${BackendUrl}/conversation/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ title: "Nova Conversa" }),
+        });
+
+        if(!response.ok) {
+            return
+        }
+
+        const json = await response.json();
+
+        delete json.messages;
+
+        setConversations([json, ...conversations]);
+
+        navigate(`./${json.id}`);
+    }
+
     return (
         <div className="sidebar">
             <div className="logo_area">
@@ -24,16 +52,21 @@ export default function Sidebar({ conversations }: Readonly<SidebarProps>) {
                 </Link>
                 <img className="logo_small" src={logo} alt="Synapse Logo" />
             </div>
-            <button className="new card border hoverable">Nova Conversa</button>
+            <button 
+                className="new card border hoverable"
+                onClick={handleCreation}
+            >
+                Nova Conversa
+            </button>
             <nav className="conversations">
                 {conversations.map((conv) => (
-                    <Link
-                        className="conversation card border hoverable link"
+                    <NavLink
+                        className={({ isActive }) => isActive ? "conversation card border hoverable link selected" : "conversation card border hoverable link"}
                         key={conv.id}
                         to={`./${conv.id}`}
                     >
                         {conv.title}
-                    </Link>
+                    </NavLink>
                 ))}
             </nav>
         </div>
