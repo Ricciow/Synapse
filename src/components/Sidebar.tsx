@@ -14,7 +14,7 @@ type conversation = {
     title: string;
 }
 
-export default function Sidebar({ conversationsReceived, openId }: Readonly<SidebarProps>) {
+export default function Sidebar({ conversationsReceived }: Readonly<SidebarProps>) {
     const revalidator = useRevalidator();
     const navigate = useNavigate();
 
