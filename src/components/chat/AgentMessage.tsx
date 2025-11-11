@@ -1,7 +1,7 @@
 import { memo } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
-import "../../styles/components/Chat/message.css";
+import "../../styles/components/chat/message.css";
 import TextDropdown from "../Dropdown/TextDropdown.tsx";
 import Spinner from "../../other/Spinner.tsx";
 
