@@ -4,11 +4,19 @@ import '../../styles/components/ChatAnswerArea.css';
 export default function Chat({
   modelName,
   modelData,
+  onToggleEnable = () => {},
 }: Readonly<{
   modelName: string;
   modelData: ModelProps;
+  onToggleEnable?: (state : boolean) => void;
 }>) {
   const logo = modelData.logo;
+  let state = false;
+
+  function handleToggle() {
+    state = !state;
+    onToggleEnable(state);
+  }
 
   return (
     <div className="chat">
@@ -16,6 +24,7 @@ export default function Chat({
         <input
           type="checkbox"
           className="model-checkbox"
+          onClick={handleToggle}
         />
         <img src={logo} alt={modelName + ' logo'} />
         <p>{modelName}</p>
