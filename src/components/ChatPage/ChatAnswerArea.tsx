@@ -8,14 +8,14 @@ export default function Chat({
 }: Readonly<{
   modelName: string;
   modelData: ModelProps;
-  onToggleEnable?: (state : boolean) => void;
+  onToggleEnable?: (state : boolean, modelName: string) => void;
 }>) {
   const logo = modelData.logo;
   let state = modelData.enabled;
 
   function handleToggle() {
     state = !state;
-    onToggleEnable(state);
+    onToggleEnable(state, modelName);
   }
 
   return (
@@ -24,7 +24,7 @@ export default function Chat({
         <input
           type="checkbox"
           className="model-checkbox"
-          onClick={handleToggle}
+          onChange={handleToggle}
           checked={state}
         />
         <img src={logo} alt={modelName + ' logo'} />

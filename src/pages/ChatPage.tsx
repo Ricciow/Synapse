@@ -71,6 +71,16 @@ export default function ChatPage() {
     });
   }
 
+  function handleModelToggle(state: boolean, model: string) {
+    setSelectedModels({
+      ...selectedModels,
+      [model]: {
+        ...selectedModels[model],
+        enabled: state,
+      },
+    });
+  }
+
   return (
     <div className="app">
       <Sidebar />
@@ -83,6 +93,7 @@ export default function ChatPage() {
               key={model}
               modelName={model}
               modelData={selectedModels[model]}
+              onToggleEnable={handleModelToggle}
             />
           ))
           .flatMap((chat, index, array) =>
