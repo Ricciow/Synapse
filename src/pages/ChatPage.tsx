@@ -155,10 +155,10 @@ export default function ChatPage() {
                             ? [
                                   chat,
                                   <div
-                                      key={`divider${index}`}
+                                      key={`divider${index}`} //NOSONAR
                                       className="chat_divider"
                                   />,
-                              ] //NOSONAR
+                              ]
                             : [chat]
                     )}
             </div>
