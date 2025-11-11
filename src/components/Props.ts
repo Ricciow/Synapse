@@ -16,4 +16,5 @@ export type ConversationProps = {
 export type MessageProps = {
   role: string;
   content: string;
+  reasoning?: string;
 };
