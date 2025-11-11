@@ -1,5 +1,5 @@
 import { memo } from "react";
-import "../../styles/components/Chat/message.css";
+import "../../styles/components/chat/message.css";
 
 type UserMessageProps = {
     message: string
