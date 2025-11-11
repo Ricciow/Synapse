@@ -229,6 +229,13 @@ export default function ChatPage() {
         }
     }
 
+    let totalEnabled = 0;
+    for (const model in selectedModels) {
+        if (selectedModels[model].enabled) {
+            totalEnabled++;
+        }
+    }
+
     return (
         <div className="chat_region">
             <DropdownSelect
@@ -259,7 +266,7 @@ export default function ChatPage() {
                             : [chat]
                     )}
             </div>
-            <Prompter enabled={totalSelected > 0} onSubmit={handleSendPrompt}/>
+            <Prompter enabled={totalSelected > 0 && totalEnabled > 0} onSubmit={handleSendPrompt}/>
         </div>
     );
 }
