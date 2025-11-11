@@ -71,12 +71,14 @@ export async function chatPageLoader({ params }: LoaderFunctionArgs): Promise<Lo
     const models = data[0]
     const history = data[1]
 
+    let totalSelected = 0;
     history.forEach((conversation) => {
-        if (models[conversation.model]) {
+        if (models[conversation.model] && totalSelected < chatLimit) {
             models[conversation.model] = {
                 ...models[conversation.model],
                 selected: true,
             };
+            totalSelected++;
         }
     });
 
