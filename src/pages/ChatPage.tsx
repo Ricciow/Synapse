@@ -7,25 +7,43 @@ import type { SelectedModelsProps } from '../components/Props.tsx';
 import claudeLogo from '../assets/claude.svg';
 import openaiLogo from '../assets/openai.svg';
 import geminiLogo from '../assets/gemini.svg';
+import deepseekLogo from '../assets/deepseek.svg';
 import Chat from '../components/ChatPage/ChatAnswerArea.tsx';
-
+import { BackendUrl } from '../constants/env.ts';
+import { useLoaderData } from 'react-router-dom';
 const chatLimit = 3;
 
+const logoConvertion : Record<string, string> = {
+  'anthropic': claudeLogo,
+  'openai': openaiLogo,
+  'gemini': geminiLogo,
+  'deepseek': deepseekLogo
+};
+
+export async function chatPageLoader(): Promise<SelectedModelsProps> {
+  const response = await fetch(`${BackendUrl}/conversation/models`)
+  
+  if (!response.ok) {
+    return {}
+  }
+
+  const json : Array<{name: string, model: string, provider: string}> = await response.json();
+
+  const models: SelectedModelsProps = {}
+
+  for (const model of json) {
+    models[model.name] = {
+      selected: false,
+      logo: logoConvertion[model.provider],
+    }
+  }
+
+  return models;
+}
+
 export default function ChatPage() {
-  const [selectedModels, setSelectedModels] = useState<SelectedModelsProps>({
-    'Claude Sonnet 4.5': {
-      selected: true,
-      logo: claudeLogo,
-    },
-    'GPT-5': {
-      selected: false,
-      logo: openaiLogo,
-    },
-    'Gemini 2.5 Pro': {
-      selected: false,
-      logo: geminiLogo,
-    },
-  });
+  const models = useLoaderData<SelectedModelsProps>()
+  const [selectedModels, setSelectedModels] = useState<SelectedModelsProps>(models);
 
   let totalSelected = 0;
   for (const model in selectedModels) {

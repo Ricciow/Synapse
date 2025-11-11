@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage';
 import Synapse from './pages/Synapse';
-import ChatPage from './pages/ChatPage';
+import ChatPage, { chatPageLoader } from './pages/ChatPage';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +20,7 @@ const router = createBrowserRouter([
   {
     path: '/chat',
     element: <ChatPage />,
+    loader: chatPageLoader
   },
   {
     path: '/synapse',
