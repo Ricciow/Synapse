@@ -1,13 +1,15 @@
-import type { ModelProps } from '../Props.tsx';
+import type { MessageProps, ModelProps } from '../Props.tsx';
 import '../../styles/components/ChatAnswerArea.css';
 
 export default function Chat({
   modelName,
   modelData,
+  history,
   onToggleEnable = () => {},
 }: Readonly<{
   modelName: string;
   modelData: ModelProps;
+  history?: MessageProps[];
   onToggleEnable?: (state : boolean, modelName: string) => void;
 }>) {
   const logo = modelData.logo;
@@ -30,7 +32,13 @@ export default function Chat({
         <img src={logo} alt={modelName + ' logo'} />
         <p>{modelName}</p>
       </div>
-      <div className="chat_messages">mensagem mensagem mensagem</div>
+      <div className="chat_messages">
+        {history?.map((message, index) => (
+          <div className="message" key={`${modelName}-${index}`}>
+            <p>{message.content}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

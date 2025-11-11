@@ -7,3 +7,13 @@ export type ModelProps = {
   enabled: boolean;
   logo: string;
 };
+
+export type ConversationProps = {
+  model: string;
+  messages: MessageProps[];
+};
+
+export type MessageProps = {
+  role: string;
+  content: string;
+};
