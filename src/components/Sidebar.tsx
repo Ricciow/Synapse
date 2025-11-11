@@ -1,22 +1,21 @@
 import "../styles/components/Sidebar.css";
 import "../styles/components/Cards/card.css";
 import logo from "../assets/synapse_logo.png";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, useRevalidator } from "react-router-dom"; 
 import { BackendUrl } from "../constants/env";
-import { useState } from "react";
 
 type SidebarProps = {
     conversationsReceived: conversation[]
+    openId?: string
 }
 
 type conversation = {
-    id: number;
+    id: string;
     title: string;
 }
 
-export default function Sidebar({ conversationsReceived }: Readonly<SidebarProps>) {
-    const [conversations, setConversations] = useState(conversationsReceived);
-
+export default function Sidebar({ conversationsReceived, openId }: Readonly<SidebarProps>) {
+    const revalidator = useRevalidator();
     const navigate = useNavigate();
 
     async function handleCreation() {
@@ -34,11 +33,17 @@ export default function Sidebar({ conversationsReceived }: Readonly<SidebarProps
 
         const json = await response.json();
 
-        delete json.messages;
-
-        setConversations([json, ...conversations]);
-
         navigate(`./${json.id}`);
+        
+        revalidator.revalidate();
+    }
+
+    async function handleDelete(id: string) {
+        const response = await fetch(`${BackendUrl}/conversation/${id}`, { method: "DELETE" });
+
+        if(response.ok) {
+            revalidator.revalidate();
+        }
     }
 
     return (
@@ -55,17 +60,29 @@ export default function Sidebar({ conversationsReceived }: Readonly<SidebarProps
             <button 
                 className="new card border hoverable"
                 onClick={handleCreation}
+                disabled={revalidator.state === "loading"}
             >
                 Nova Conversa
             </button>
             <nav className="conversations">
-                {conversations.map((conv) => (
+                {conversationsReceived.map((conv) => (
                     <NavLink
                         className={({ isActive }) => isActive ? "conversation card border hoverable link selected" : "conversation card border hoverable link"}
                         key={conv.id}
                         to={`./${conv.id}`}
                     >
-                        {conv.title}
+                        <p>{conv.title}</p>
+                        <button 
+                            className="delete" 
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                handleDelete(conv.id)}
+                            }
+                            disabled={revalidator.state === "loading"}
+                        >
+                            <i className="fi fi-br-trash"></i>
+                        </button>
                     </NavLink>
                 ))}
             </nav>

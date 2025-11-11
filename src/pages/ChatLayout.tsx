@@ -1,5 +1,5 @@
 import Sidebar from "../components/Sidebar";
-import { Outlet, useLoaderData } from "react-router-dom";
+import { Outlet, useLoaderData, useParams } from "react-router-dom";
 import { BackendUrl } from "../constants/env";
 
 export async function chatLayoutLoader() {
@@ -17,9 +17,11 @@ export async function chatLayoutLoader() {
 export default function ChatLayout() {
     const conversations = useLoaderData();
 
+    const { id } = useParams()
+
     return (
     <div className="app">
-        <Sidebar conversationsReceived={conversations} />
+        <Sidebar conversationsReceived={conversations} openId={id} />
         <Outlet />
     </div>);
 }

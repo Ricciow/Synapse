@@ -110,6 +110,42 @@
 }
 
 .link {
+  position: relative;
   text-decoration: none;
   color: var(--text-primary);
+}
+
+.link p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar:hover .delete {
+  width: initial;
+}
+
+.delete {
+  position: absolute;
+  right: var(--sm);
+  color: rgb(100, 100, 100);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete:hover {
+  color: rgb(190, 58, 58);
+}
+
+.link button i {
+  width: var(--sm);
+  height: var(--sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
