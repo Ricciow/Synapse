@@ -11,7 +11,7 @@ export default function Chat({
   onToggleEnable?: (state : boolean) => void;
 }>) {
   const logo = modelData.logo;
-  let state = false;
+  let state = modelData.enabled;
 
   function handleToggle() {
     state = !state;
@@ -25,6 +25,7 @@ export default function Chat({
           type="checkbox"
           className="model-checkbox"
           onClick={handleToggle}
+          checked={state}
         />
         <img src={logo} alt={modelName + ' logo'} />
         <p>{modelName}</p>

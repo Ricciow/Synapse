@@ -4,5 +4,6 @@ export type SelectedModelsProps = {
 
 export type ModelProps = {
   selected: boolean;
+  enabled: boolean;
   logo: string;
 };

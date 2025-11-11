@@ -34,6 +34,7 @@ export async function chatPageLoader(): Promise<SelectedModelsProps> {
   for (const model of json) {
     models[model.name] = {
       selected: false,
+      enabled: true,
       logo: logoConvertion[model.provider],
     }
   }
