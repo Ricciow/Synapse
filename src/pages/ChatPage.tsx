@@ -57,6 +57,7 @@ async function fetchHistory(id: string): Promise<ConversationProps[]| Response> 
 type LoaderData = {
     models: SelectedModelsProps;
     history: ConversationProps[];
+    id: string
 };
 
 export async function chatPageLoader({ params }: LoaderFunctionArgs): Promise<LoaderData| Response> {
@@ -87,14 +88,16 @@ export async function chatPageLoader({ params }: LoaderFunctionArgs): Promise<Lo
 
     const result = {
         models,
-        history
+        history,
+        id
     }
 
     return result
 }
 
 export default function ChatPage() {
-    const { models, history } = useLoaderData<LoaderData>();
+    const { models, history, id } = useLoaderData<LoaderData>();
+    const [conversation, setConversation] = useState<ConversationProps[]>(history);
     const [selectedModels, setSelectedModels] =
         useState<SelectedModelsProps>(models);
 
@@ -134,6 +137,96 @@ export default function ChatPage() {
         });
     }
 
+    async function sendPromptRequest(prompt: string, model: string) {
+        const userMessage = { role: "user", content: prompt }
+        const agentMessage = { role: "assistant", content: "", reasoning: "" }
+
+        setConversation((prev : ConversationProps[]) : ConversationProps[] => {
+            return prev.map((conversation) => {
+                if (conversation.model === model) {
+                    conversation.messages.push(userMessage, agentMessage);
+                }
+                return conversation
+            })
+        });
+        
+        const response = await fetch(`${BackendUrl}/conversation/${id}/message`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                user_input: prompt,
+                model: model
+            }),
+        });
+
+        if (!response.ok || !response.body) {
+            setConversation((prev : ConversationProps[]) : ConversationProps[] => {
+                return prev.map((conversation) => {
+                    if (conversation.model === model) {
+                        conversation.messages.pop();
+                    }
+                    return conversation
+                })
+            });
+            throw new Error(`Erro na requisição: ${response.status}`);
+        }
+        
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+
+        let baseResponse = {
+            role: "assistant" as const,
+            content: "",
+            reasoning: "",
+        }
+
+        async function processStream() {
+            const { done, value } = await reader.read();
+
+            if (done) {
+                return;
+            }
+
+            const chunkString = decoder.decode(value, { stream: true });
+            const jsonStrings = chunkString.trim().split('\n');
+
+            jsonStrings.forEach(str => {
+                if (str) {
+                    try {
+                        const jsonData = JSON.parse(str);
+                        
+                        if (jsonData.content) baseResponse.content += jsonData.content;
+                        if (jsonData.reasoning) baseResponse.reasoning += jsonData.reasoning;
+
+                        setConversation((prev : ConversationProps[]) : ConversationProps[] => {
+                            return prev.map((conversation) => {
+                                if (conversation.model === model) {
+                                    conversation.messages.pop();
+                                    conversation.messages.push(baseResponse);
+                                }
+                                return conversation
+                            })
+                        })
+                    } catch (err) {
+                        console.error("Não foi possível parsear o JSON do chunk:", str, err);
+                    }
+                }
+            });
+
+            await processStream();
+        };
+
+        await processStream();
+    }
+
+    function handleSendPrompt(text: string) {
+        for (const model in selectedModels) {
+            if (selectedModels[model].selected && selectedModels[model].enabled) {
+                sendPromptRequest(text, model);
+            }
+        }
+    }
+
     return (
         <>
             <DropdownSelect
@@ -148,7 +241,7 @@ export default function ChatPage() {
                             key={model}
                             modelName={model}
                             modelData={selectedModels[model]}
-                            history={history.find((message) => message.model === model)?.messages}
+                            history={conversation.find((message) => message.model === model)?.messages}
                             onToggleEnable={handleModelToggle}
                         />
                     ))
@@ -164,7 +257,7 @@ export default function ChatPage() {
                             : [chat]
                     )}
             </div>
-            <Prompter enabled={totalSelected > 0} />
+            <Prompter enabled={totalSelected > 0} onSubmit={handleSendPrompt}/>
         </>
     );
 }
