@@ -2,7 +2,8 @@ import { memo } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
 import "../../styles/components/Chat/message.css";
-import TextDropdown from "../Dropdown/textDropdown";
+import TextDropdown from "../Dropdown/TextDropdown.tsx";
+import Spinner from "../../other/Spinner.tsx";
 
 type AgentMessageProps = {
     message: string
@@ -11,7 +12,7 @@ type AgentMessageProps = {
 
 function AgentMessage({ message, reasoning }: Readonly<AgentMessageProps>) {
     if(message == "" && reasoning == "") {
-        return (<div className="message agent">gerando...</div>)
+        return (<div className="message agent"><Spinner message="Gerando..."/></div>)
     }
 
     return (
