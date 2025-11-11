@@ -108,3 +108,8 @@
   padding: var(--sm);
   text-wrap: nowrap;
 }
+
+.link {
+  text-decoration: none;
+  color: var(--text-primary);
+}

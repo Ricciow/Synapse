@@ -3,13 +3,16 @@ import "../styles/components/Cards/card.css";
 import logo from "../assets/synapse_logo.png";
 import { Link } from "react-router-dom";
 
-export default function Sidebar() {
-    const conversations = [
-        { id: 1, title: "Conversa 1" },
-        { id: 2, title: "Conversa 2" },
-        { id: 3, title: "Conversa 3" },
-    ];
-    
+type SidebarProps = {
+    conversations: conversation[]
+}
+
+type conversation = {
+    id: number;
+    title: string;
+}
+
+export default function Sidebar({ conversations }: Readonly<SidebarProps>) {
     return (
         <div className="sidebar">
             <div className="logo_area">
@@ -24,12 +27,13 @@ export default function Sidebar() {
             <button className="new card border hoverable">Nova Conversa</button>
             <nav className="conversations">
                 {conversations.map((conv) => (
-                    <div
-                        className="conversation card border hoverable"
+                    <Link
+                        className="conversation card border hoverable link"
                         key={conv.id}
+                        to={`./${conv.id}`}
                     >
                         {conv.title}
-                    </div>
+                    </Link>
                 ))}
             </nav>
         </div>

@@ -1,4 +1,3 @@
-import Sidebar from "../components/Sidebar.tsx";
 import Prompter from "../components/Prompter.tsx";
 import "../styles/pages/ChatPage.css";
 import DropdownSelect from "../components/Dropdown/dropdownSelect.tsx";
@@ -10,7 +9,7 @@ import geminiLogo from "../assets/gemini.svg";
 import deepseekLogo from "../assets/deepseek.svg";
 import Chat from "../components/ChatPage/ChatAnswerArea.tsx";
 import { BackendUrl } from "../constants/env.ts";
-import { useLoaderData, type LoaderFunctionArgs } from "react-router-dom";
+import { redirect, useLoaderData, type LoaderFunctionArgs } from "react-router-dom";
 const chatLimit = 3;
 
 const logoConvertion: Record<string, string> = {
@@ -43,11 +42,11 @@ async function fetchModels(): Promise<SelectedModelsProps> {
     return models;
 }
 
-async function fetchHistory(id: string): Promise<ConversationProps[]> {
+async function fetchHistory(id: string): Promise<ConversationProps[]| Response> {
     const response = await fetch(`${BackendUrl}/conversation/history/${id}`);
 
     if (!response.ok) {
-        return [];
+        return redirect('/chat');
     }
 
     const json: ConversationProps[] = await response.json();
@@ -60,7 +59,7 @@ type LoaderData = {
     history: ConversationProps[];
 };
 
-export async function chatPageLoader({ params }: LoaderFunctionArgs): Promise<LoaderData> {
+export async function chatPageLoader({ params }: LoaderFunctionArgs): Promise<LoaderData| Response> {
     const id = params.id as string;
 
     const data = await Promise.all([
@@ -70,6 +69,10 @@ export async function chatPageLoader({ params }: LoaderFunctionArgs): Promise<Lo
 
     const models = data[0]
     const history = data[1]
+
+    if(history instanceof Response) {
+        return history
+    }
 
     let totalSelected = 0;
     history.forEach((conversation) => {
