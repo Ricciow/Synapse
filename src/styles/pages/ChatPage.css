@@ -60,6 +60,7 @@ body {
   flex-direction: row;
   padding: var(--md);
   overflow-y: hidden;
+  height: 100%;
 }
 
 .chat_divider {

@@ -2,6 +2,7 @@ import { memo } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
 import "../../styles/components/Chat/message.css";
+import TextDropdown from "../Dropdown/textDropdown";
 
 type AgentMessageProps = {
     message: string
@@ -15,7 +16,7 @@ function AgentMessage({ message, reasoning }: Readonly<AgentMessageProps>) {
 
     return (
         <div className="message agent"> 
-            {reasoning && <p>{reasoning}</p>}
+            {reasoning && <TextDropdown title="Pensamento" text={reasoning} />}
             <div className="message_area">
                 <Markdown remarkPlugins={[remarkGfm]}>{message}</Markdown>
             </div>

@@ -1,7 +1,7 @@
 import Prompter from "../components/Prompter.tsx";
 import "../styles/pages/ChatPage.css";
 import DropdownSelect from "../components/Dropdown/dropdownSelect.tsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ConversationProps, MessageProps, SelectedModelsProps } from "../components/Props.tsx";
 import claudeLogo from "../assets/claude.svg";
 import openaiLogo from "../assets/openai.svg";
@@ -91,15 +91,18 @@ export async function chatPageLoader({ params }: LoaderFunctionArgs): Promise<Lo
         history,
         id
     }
-
     return result
 }
 
 export default function ChatPage() {
     const { models, history, id } = useLoaderData<LoaderData>();
     const [conversation, setConversation] = useState<ConversationProps[]>(history);
-    const [selectedModels, setSelectedModels] =
-        useState<SelectedModelsProps>(models);
+    const [selectedModels, setSelectedModels] = useState<SelectedModelsProps>(models);
+
+    useEffect(() => {
+        setConversation(history);
+        setSelectedModels(models);
+    }, [history, models]);
 
     let totalSelected = 0;
     for (const model in selectedModels) {
