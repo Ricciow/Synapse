@@ -142,21 +142,30 @@ export default function ChatPage() {
 
     function pushConversationForModel(model: string, messages: MessageProps[], pop ?: boolean) {
         setConversation((prev: ConversationProps[]): ConversationProps[] => {
-            return prev.map((conversation) => {
-                if (conversation.model === model) {
+            
+            const existingIndex = prev.findIndex(convo => convo.model === model);
 
-                    let oldMessages = conversation.messages
-                    if (pop) {
-                        oldMessages = oldMessages.slice(0, -1);
+            if (existingIndex > -1) {
+                return prev.map((conversation, index) => {
+                    if (index === existingIndex) {
+                        let oldMessages = conversation.messages
+                        if (pop) {
+                            oldMessages = oldMessages.slice(0, -1);
+                        }
+                        return {
+                            ...conversation,
+                            messages: [...oldMessages, ...messages],
+                        };
                     }
-
-                    return {
-                        ...conversation,
-                        messages: [...oldMessages, ...messages],
-                    };
-                }
-                return conversation;
-            });
+                    return conversation;
+                });
+            } else {
+                const newConversation: ConversationProps = {
+                    model: model,
+                    messages: messages 
+                };
+                return [...prev, newConversation];
+            }
         });
     }
 
