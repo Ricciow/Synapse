@@ -132,8 +132,7 @@ export default function ChatPage() {
     }
 
     return (
-        <div className="app">
-            <Sidebar />
+        <>
             <DropdownSelect
                 onSelect={handleModelSelect}
                 selected={selectedModels}
@@ -163,6 +162,6 @@ export default function ChatPage() {
                     )}
             </div>
             <Prompter enabled={totalSelected > 0} />
-        </div>
+        </>
     );
 }

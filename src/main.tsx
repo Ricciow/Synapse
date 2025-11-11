@@ -9,6 +9,7 @@ import {
 import ErrorPage from './pages/ErrorPage';
 import Synapse from './pages/Synapse';
 import ChatPage, { chatPageLoader } from './pages/ChatPage';
+import ChatLayout from './pages/ChatLayout';
 
 const router = createBrowserRouter([
   {
@@ -18,9 +19,15 @@ const router = createBrowserRouter([
     },
   },
   {
-    path: '/chat/:id',
-    element: <ChatPage />,
-    loader: chatPageLoader
+    path: '/chat',
+    element: <ChatLayout />,
+    children: [
+      {
+        path: ':id',
+        element: <ChatPage />,
+        loader: chatPageLoader
+      }
+    ]
   },
   {
     path: '/synapse',
