@@ -68,9 +68,21 @@ export async function chatPageLoader({ params }: LoaderFunctionArgs): Promise<Lo
         fetchHistory(id),
     ])
 
+    const models = data[0]
+    const history = data[1]
+
+    history.forEach((conversation) => {
+        if (models[conversation.model]) {
+            models[conversation.model] = {
+                ...models[conversation.model],
+                selected: true,
+            };
+        }
+    });
+
     const result = {
-        models: data[0],
-        history: data[1],
+        models,
+        history
     }
 
     return result
@@ -80,15 +92,6 @@ export default function ChatPage() {
     const { models, history } = useLoaderData<LoaderData>();
     const [selectedModels, setSelectedModels] =
         useState<SelectedModelsProps>(models);
-    
-    history.forEach((conversation) => {
-        if (selectedModels[conversation.model]) {
-            selectedModels[conversation.model] = {
-                ...selectedModels[conversation.model],
-                selected: true,
-            };
-        }
-    });
 
     let totalSelected = 0;
     for (const model in selectedModels) {

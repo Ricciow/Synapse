@@ -23,14 +23,17 @@ export default function Chat({
   return (
     <div className="chat">
       <div className="chat_header">
-        <input
-          type="checkbox"
-          className="model-checkbox"
-          onChange={handleToggle}
-          checked={state}
-        />
-        <img src={logo} alt={modelName + ' logo'} />
-        <p>{modelName}</p>
+        <label htmlFor={modelName} className='model_label'>
+          <input
+            type="checkbox"
+            className="model-checkbox"
+            onChange={handleToggle}
+            checked={state}
+            id={modelName}
+          />
+          <img src={logo} alt={modelName + ' logo'} />
+          <p>{modelName}</p>
+        </label>
       </div>
       <div className="chat_messages">
         {history?.map((message, index) => (
