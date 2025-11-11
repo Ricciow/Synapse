@@ -2,7 +2,7 @@ import Prompter from "../components/Prompter.tsx";
 import "../styles/pages/ChatPage.css";
 import DropdownSelect from "../components/Dropdown/dropdownSelect.tsx";
 import { useState } from "react";
-import type { ConversationProps, SelectedModelsProps } from "../components/Props.tsx";
+import type { ConversationProps, MessageProps, SelectedModelsProps } from "../components/Props.tsx";
 import claudeLogo from "../assets/claude.svg";
 import openaiLogo from "../assets/openai.svg";
 import geminiLogo from "../assets/gemini.svg";
@@ -137,21 +137,31 @@ export default function ChatPage() {
         });
     }
 
-    async function sendPromptRequest(prompt: string, model: string) {
-        const userMessage = { role: "user", content: prompt }
-        const agentMessage = { role: "assistant", content: "", reasoning: "" }
-
+    function pushConversationForModel(model: string, messages: MessageProps[], pop ?: boolean) {
         setConversation((prev: ConversationProps[]): ConversationProps[] => {
             return prev.map((conversation) => {
                 if (conversation.model === model) {
+
+                    let oldMessages = conversation.messages
+                    if (pop) {
+                        oldMessages = oldMessages.slice(0, -1);
+                    }
+
                     return {
                         ...conversation,
-                        messages: [...conversation.messages, userMessage, agentMessage],
+                        messages: [...oldMessages, ...messages],
                     };
                 }
                 return conversation;
             });
         });
+    }
+
+    async function sendPromptRequest(prompt: string, model: string) {
+        const userMessage = { role: "user", content: prompt }
+        const agentMessage = { role: "assistant", content: "", reasoning: "" }
+
+        pushConversationForModel(model, [userMessage, agentMessage]);
         
         const response = await fetch(`${BackendUrl}/conversation/${id}/message`, {
             method: "POST",
@@ -163,17 +173,7 @@ export default function ChatPage() {
         });
 
         if (!response.ok || !response.body) {
-            setConversation((prev : ConversationProps[]) : ConversationProps[] => {
-                return prev.map((conversation) => {
-                    if (conversation.model === model) {
-                        return {
-                            ...conversation,
-                            messages: conversation.messages.slice(0, -1)
-                        }
-                    }
-                    return conversation
-                })
-            });
+            pushConversationForModel(model, [], true);
 
             throw new Error(`Erro na requisição: ${response.status}`);
         }
@@ -205,17 +205,7 @@ export default function ChatPage() {
                         if (jsonData.content) baseResponse.content += jsonData.content;
                         if (jsonData.reasoning) baseResponse.reasoning += jsonData.reasoning;
 
-                        setConversation((prev : ConversationProps[]) : ConversationProps[] => {
-                            return prev.map((conversation) => {
-                                if (conversation.model === model) {
-                                    return {
-                                        ...conversation,
-                                        messages: [...conversation.messages.slice(0, -1), baseResponse]
-                                    }
-                                }
-                                return conversation
-                            })
-                        })
+                        pushConversationForModel(model, [baseResponse], true);
                     } catch (err) {
                         console.error("Não foi possível parsear o JSON do chunk:", str, err);
                     }
